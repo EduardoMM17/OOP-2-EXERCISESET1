@@ -1,0 +1,48 @@
+#include <iostream>
+#include <list>
+#include <vector>
+
+template<typename container>
+container sumar_rango(container cnt1, container cnt2){
+    int cnt1Size = 0;
+    int cnt2Size = 0;
+    for(auto i : cnt1)
+        cnt1Size++;
+    for(auto i : cnt2)
+        cnt2Size++;
+    int cnt3Size = (cnt2Size > cnt1Size) ? cnt2Size : cnt1Size;
+    container cnt3(cnt3Size);
+    auto it1 = cnt1.begin(); auto it2 = cnt2.begin();
+    for(auto& i : cnt3){
+        if(it1 == cnt1.end()){
+            it1 = cnt1.begin();
+        }
+        else if(it2 == cnt2.end()){
+            it2 = cnt2.begin();
+        }
+        i = *it1 + *it2;
+        it1++;
+        it2++;
+    }
+    return cnt3;
+}
+
+
+using std::cin; using std::cout; using std::endl; using std::vector;
+
+int main() {
+    vector <int> v1 = {1,3,4};
+    vector <int> v2 = {4,5,6};
+    auto v3 = sumar_rango(v1,v2);
+    for(auto i : v3)
+        cout << i << " ";
+    cout << endl;
+    std::list<int> v4 = {1,2,3,4,5};
+    std::list<int> v5 = {10,20};
+    auto v6 = sumar_rango(v4,v5);
+    for(auto i : v6)
+        cout << i << " ";
+    return 0;
+}
+
+

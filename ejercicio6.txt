@@ -1,0 +1,17 @@
+#include <iostream>
+#include <vector>
+
+using std::cout; using std::cin; using std::endl; using std::vector;
+
+template<typename T, typename ... Args>
+vector<T> generar_contenedor(T val, Args ... args){
+    vector<T> cnt = {val, args ...};
+    return cnt;
+}
+
+int main() {
+    auto c1 = generar_contenedor(1,2,3,4);
+    for(auto i : c1)
+        cout << i << " ";
+    return 0;
+}

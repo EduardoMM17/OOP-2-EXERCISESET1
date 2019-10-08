@@ -1,0 +1,27 @@
+#include <iostream>
+#include <vector>
+
+using std::cout; using std::cin; using std::endl; using std::vector;
+
+template<typename container, typename ... Args>
+int min_size(container cnt, Args ... args){
+    vector<container> vec {args..., cnt};
+    auto it = vec.begin();
+    int minor = (*it).size();
+    for(const auto& i : vec){
+        if(i.size() < minor){
+            minor = i.size();
+        }
+    }
+    return minor;
+}
+
+int main() {
+    vector<int> v1 = {11};
+    vector<int> v2 = {21,22,23,1,2};
+    vector<int> v3 = {31,32,33,4};
+    cout << min_size(v2,v3);
+    cout << endl;
+    cout << min_size(v1,v2,v3);
+    return 0;
+}

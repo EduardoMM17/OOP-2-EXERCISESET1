@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+#include <list>
+
+using std::cout; using std::cin; using std::vector; using std::list; using std::endl; using std::next;
+
+template<typename container>
+container rotate_change(container v1, int rotations){
+    if(rotations > 0){
+        for(int i = 0; i < rotations; i++){
+            auto temp1 = *(v1.begin());
+            auto it1 = v1.begin();
+            auto notEnd = prev(v1.end(),1);
+            *it1 = *notEnd;
+            auto j = next(v1.begin(),1);
+            for(;j != v1.end(); j++){
+                if(j != v1.end()){
+                    auto temp2 = *j;
+                    *j = temp1;
+                    temp1 = temp2;
+                }
+            }
+        }
+        return v1;
+    }
+    else{
+        rotations *= -1;
+        for(int i = 0; i < rotations; i++){
+            auto notEnd = prev(v1.end(),1);
+            auto temp1 = *notEnd;
+            auto it1 = v1.begin();
+            *notEnd = *it1;
+            auto j = prev(notEnd,1);
+            for(;j != v1.begin();j--){
+                auto temp2 = *j;
+                *j = temp1;
+                temp1 = temp2;
+            }
+            *it1 = temp1;
+        }
+        return v1;
+    }
+}
+int main() {
+    vector<int>v1 = {1,2,3,4,5,6};
+    auto v2 = rotate_change(v1,2);
+    for(auto i : v2)
+        cout << i << " ";
+    //
+    cout << endl;
+    //
+    list<int> v3 = {10,20,30,40,50};
+    auto v4 = rotate_change(v3,-2);
+    for(auto i : v4)
+        cout << i << " ";
+    return 0;
+}

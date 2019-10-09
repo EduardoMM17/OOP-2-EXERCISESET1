@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+
+using std::cout; using std::cin; using std::endl; using std::vector;
+
+template<typename T, typename ... Args>
+T sum_product(T num, Args ... args){
+    T sum = 0;
+    vector <T> vec = {num, args ...};
+    vector <T> vecPares;
+    vector <T> vecImpares;
+    for(auto i : vec){
+        if(i % 2 != 0)
+            vecImpares.push_back(i);
+        else
+            vecPares.push_back(i);
+    }
+    if(vecPares.size() >= vecImpares.size()){
+        auto itP = vecPares.begin();
+        for(auto i = vecImpares.begin(); i != vecImpares.end(); i++){
+            auto multi = (*i) * (*itP);
+            sum += multi;
+            itP++;
+        }
+        while(itP != vecPares.end()){
+            sum += *itP;
+            itP++;
+        }
+    }
+    else{
+        auto itI = vecImpares.begin();
+        for(auto i = vecPares.begin(); i != vecPares.end(); i++){
+            auto multi = (*i) * (*itI);
+            sum += multi;
+            itI++;
+        }
+        while(itI != vecImpares.end()){
+            sum += *itI;
+            itI++;
+        }
+    }
+    return sum;
+}
+
+int main() {
+    cout << sum_product(35,4,15,6,8,10);
+    return 0;
+}

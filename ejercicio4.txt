@@ -4,6 +4,24 @@
 
 using std::cout; using std::cin; using std::endl; using std::vector; using std::list;
 
+template<typename container>
+container delete_items(container v1, int numberToDelete){
+    int newCntSize = 0;
+    for(auto i : v1){
+        if(i != numberToDelete)
+            newCntSize++;
+    }
+    container v2(newCntSize);
+    auto it2 = v2.begin();
+    for(auto i : v1){
+        if(i != numberToDelete){
+            *it2 = i;
+            it2++;
+        }
+    }
+    return v2;
+}
+
 template<typename container, typename T>
 container delete_items(container v1, std::list<T> l1){
     int newCntSize = 0;

@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+
+using std::cout; using std::endl; using std::vector;
+
+template<typename container, typename T, typename C>
+int binarySearch(container cnt, T low, C high, T key){
+    while(low <= high){
+        int mid = low + (high-low)/2;
+        if(cnt[mid] == key)
+            return mid;
+        if(cnt[mid] < key)
+            low = mid + 1;
+        else
+            high = mid -1;
+    }
+    return -1;
+}
+int main() {
+    vector <int> v1 = {1,13,18,42,55,61,72};
+    cout << binarySearch(v1,0,v1.size()-1,55);
+    return 0;
+}
